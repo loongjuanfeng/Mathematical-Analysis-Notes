@@ -14,7 +14,12 @@
 
 = 指数分母配多项式分子的级数
 
-#example[$sum_(n = 1)^oo n / 3^n$][
+#example[$sum_(n = 1)^oo n / 3^n$][P7 Q1.(8)][
+  求
+  $
+    sum_(i = 1)^oo n / 3^n
+  $
+
   先从几何级数
   $
     sum_(n = 1)^oo x^n = x / (1 - x), quad abs(x) < 1
@@ -106,4 +111,117 @@ $
   $
     sum_(n = 1)^oo n^2 / 3^n = (1 / 3) (1 + 1 / 3) / (1 - 1 / 3)^3 = 3 / 2
   $
+]
+
+// #todo[补全][
+//   $ sum_(i = 0)^oo cos(n theta) (theta eq.not 0) $ 的求和如何估计有界？
+// ]
+
+#proposition[余弦振荡项的部分和估计][P7 Q1.(9)][
+  记
+  $
+    C_N(theta) = sum_(n = 0)^N cos(n theta)
+  $
+  若 $theta = 2 k pi$，其中 $k$ 为整数，则 $C_N(theta) = N + 1$，故部分和不有界。
+
+  若 $theta != 2 k pi$ 对任意整数 $k$ 都成立，则
+  $
+    C_N(theta)
+    = sin(((N + 1) theta) / 2) cos((N theta) / 2) / sin(theta / 2)
+  $
+  从而
+  $
+    abs(C_N(theta)) <= 1 / abs(sin(theta / 2))
+  $
+  因而对每个固定的这类 $theta$，部分和数列 $C_N(theta)$ 有界。
+]
+
+#proof[][
+  利用恒等式
+  $
+    2 sin(theta / 2) cos(n theta)
+    = sin((n + 1 / 2) theta) - sin((n - 1 / 2) theta)
+  $
+  从 $n = 0$ 到 $N$ 求和，得到
+  $
+    2 sin(theta / 2) C_N(theta)
+    = sin((N + 1 / 2) theta) + sin(theta / 2)
+  $
+  再用
+  $
+    sin alpha + sin beta = 2 sin((alpha + beta) / 2) cos((alpha - beta) / 2)
+  $
+  便得
+  $
+    C_N(theta)
+    = sin(((N + 1) theta) / 2) cos((N theta) / 2) / sin(theta / 2)
+  $
+  于是
+  $
+    abs(C_N(theta)) <= 1 / abs(sin(theta / 2))
+  $
+  证毕。
+]
+
+#remark[与Dirichlet判别法的关系][
+  这里真正有用的，不是无穷级数
+  $
+    sum_(n = 0)^oo cos(n theta)
+  $
+  本身收敛，而是振荡因子
+  $
+    a_n = cos(n theta)
+  $
+  的部分和有界。于是只要再乘上一个单调趋于 $0$ 的因子 $b_n$，就可由Dirichlet判别法推出
+  $
+    sum_(n = 0)^oo cos(n theta) b_n
+  $
+  收敛。
+]
+
+// #todo[][
+//   $ sum_(n = 0)^oo q^n cos(n theta) quad (abs(q) < 1) $ 求和
+// ]
+
+#example[$sum_(n = 0)^oo q^n cos(n theta)$][P7 Q1.(9)][
+  设
+  $
+    S = sum_(n = 0)^oo q^n cos(n theta), quad abs(q) < 1
+  $
+  考虑复几何级数
+  $
+    sum_(n = 0)^oo q^n e^(i n theta)
+    = sum_(n = 0)^oo (q e^(i theta))^n
+    = 1 / (1 - q e^(i theta))
+  $
+  其中用到了 $abs(q e^(i theta)) = abs(q) < 1$。
+
+  将右端分母有理化，得
+  $
+    1 / (1 - q e^(i theta))
+    = (1 - q e^(-i theta)) / (1 - 2 q cos theta + q^2)
+  $
+  左端的实部正是
+  $
+    sum_(n = 0)^oo q^n cos(n theta)
+  $
+  而右端的实部为
+  $
+    (1 - q cos theta) / (1 - 2 q cos theta + q^2)
+  $
+  故
+  $
+    sum_(n = 0)^oo q^n cos(n theta)
+    = (1 - q cos theta) / (1 - 2 q cos theta + q^2)
+  $
+]
+
+#remark[与上一题的区别][
+  当 $abs(q) < 1$ 时，因子 $q^n$ 已提供指数衰减，所以级数本身直接收敛，而且能化成几何级数求出闭式。
+
+  当 $q = 1$ 时，就退化成
+  $
+    sum_(n = 0)^oo cos(n theta)
+  $
+  型，这时一般不收敛；真正有用的是它的部分和有界，这正是Dirichlet判别法里要用到的信息。
 ]
