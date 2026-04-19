@@ -367,7 +367,6 @@ $
 $
   x = x_0 plus.minus R
 $
-。
 
 #theorem[Abel定理在幂级数中的结论][
   若幂级数
