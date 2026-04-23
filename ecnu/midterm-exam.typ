@@ -51,6 +51,32 @@ $
   适合在 $s_n (x)$ 难以求出的时候使用。
 ]
 
+#theorem[Weierstrass判敛][
+  $
+    exists {a_n}_(n = 1)^oo subset RR^+, forall n in NN, \
+    sup_(x in D) {abs(u_n (x))} <= a_n
+  $
+  此时称 ${u_n (x)}_(n = 1)^oo$ 正常收敛。
+]
+
+#theorem[Abel判敛][
+  ${a_n (x)}_(n = 1)^oo, {b_n (x)}_(n = 1)^oo$ 为两个函数列。如果
+  + ${a_n (x)}_(n = 1)^oo$ 关于 $n$ 单调，且一致有界。
+    $
+      forall n in NN, x in D, \
+      abs(a_n (x)) < M
+    $
+  + $sum_(n = 1)^oo b_n (x)$ 一致收敛。
+  则 ${sum_(i = 1)^n a_i (x) b_i (x)}_(n = 1)^oo$ 一致收敛。
+]
+
+#theorem[Dirichlet判敛][
+  ${a_n (x)}_(n = 1)^oo, {b_n (x)}_(n = 1)^oo$ 为两个函数列。如果
+  + $a_n (x) arrows.rr 0, quad n arrow oo$
+  + $sum_(i = 1)^N b_n (x)$ 一致有界。
+  则 ${sum_(i = 1)^n a_i (x) b_i (x)}_(n = 1)^oo$ 一致收敛。
+]
+
 === 不一致收敛
 
 #definition[定义][
@@ -82,6 +108,39 @@ $
     exists epsilon_0, forall N in NN, exists m > n > N, \
     sup_(x in D) {abs(s_m (x) - s_n (x))} = sup_(x in D) {abs(sum_(i = n + 1)^m u_i (x))} >= epsilon_0
   $
+]
+
+== 一致收敛级数的性质
+
+#theorem[连续性][
+  $
+    forall n in NN, f_n in C(D) arrow.long.double lim_(n -> oo) f_n = f_oo in C(D)
+  $
+  其中 $D$ 可以是任何集合。另一种表示形式是
+  $
+    forall n in NN, f_n in C(D) arrow.long.double lim_(n -> oo) lim_(x -> x_0) f_n (x_0) = lim_(x -> x_0) lim_(n -> oo) f_n (x_0)
+  $
+]
+
+#theorem[可积性][
+  $
+    forall n in NN, f_n : [a, b] -> RR, f_n arrows.rr f_oo arrow.double.long integral lim_(n -> oo) f_n (x) dif x = lim_(n -> oo) integral f_n (x) dif x
+  $
+]
+
+#theorem[可导性][
+  $
+    f_n in C^1 [a, b], f'_n arrows.rr g \
+    exists x_0 in [a, b], lim_(n -> oo) f_n (x_0) < oo
+  $
+  则有
+  $
+    f_n arrows.rr f, f'_n -> f' = g, quad n -> oo
+  $
+]
+
+#theorem[Dini判敛][
+  在紧集 $E$ 上，$f_n : E -> R$ 关于 $n$ 单调，$f_n -> f, f in C(E), quad n -> oo$，则 $f_n arrows.rr f, quad n -> oo$。
 ]
 
 = Chapter 11
