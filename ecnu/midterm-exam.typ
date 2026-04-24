@@ -159,9 +159,9 @@ $
   $
     f(x) = f(x_0) + f'(x_0) (x - x_0) + dots + f^(n)(x_0) / n! (x - x_0)^n + o((x - x_0)^n)
   $
-  特别地，$x_0 = 0$ 时就是 Maclaurin 公式。
+  特别地，$x_0 = 0$ 时就是Maclaurin公式。
 
-+ 若题目要求 Lagrange 余项，写成
++ 若题目要求Lagrange余项，写成
   $
     f(x) = sum_(k = 0)^n f^(k)(x_0) / k! (x - x_0)^k + f^(n+1)(xi) / (n + 1)! (x - x_0)^(n+1)
   $
@@ -175,7 +175,7 @@ $
   $
     f(vc(x)_0 + Delta vc(x)) = sum_(k = 0)^n (D^k f|_(vc(x) = vc(x)_0)) / k! + o(norm(Delta vc(x))^n)
   $
-  若要写 Lagrange 余项，则
+  若要写Lagrange余项，则
   $
     r_n = (D^(n+1) f|_(vc(x) = vc(x)_0 + theta Delta vc(x))) / (n + 1)!, quad theta in (0, 1)
   $
@@ -195,10 +195,10 @@ $
 
 + 做题口令
   1. 极限 / 等价无穷小：通常写到第一个非零项为止。
-  2. 判极值：先看一阶项是否为 $0$；若为 $0$，立刻写二阶 Taylor 公式。
-  3. 需要估计误差大小时用 Lagrange 余项；只求局部等价时优先用 Peano 余项。
+  2. 判极值：先看一阶项是否为 $0$；若为 $0$，立刻写二阶Taylor公式。
+  3. 需要估计误差大小时用Lagrange余项；只求局部等价时优先用Peano余项。
 
-+ 几个常用的 Maclaurin 展开（默认 $x -> 0$）
++ 几个常用的Maclaurin展开（默认 $x -> 0$）
   $
     e^x = 1 + x + x^2 / 2 + o(x^2), quad sin x = x - x^3 / 6 + o(x^3) \
     cos x = 1 - x^2 / 2 + o(x^2), quad ln(1 + x) = x - x^2 / 2 + x^3 / 3 + o(x^3) \
