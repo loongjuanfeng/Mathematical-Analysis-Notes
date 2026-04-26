@@ -39,19 +39,20 @@ $
 #definition[定义][
   $
     forall epsilon, exists N in NN, forall n > N, \
-    abs(sup_(x in D) {s_n (x) - s_oo (x)}) < epsilon
+    sup_(x in D) {abs(s_n (x) - s_oo (x))} < epsilon
   $
 ]
 
 #theorem[Cauchy判敛][
   $
     forall epsilon, exists N in NN, forall m > n > N, \
-    abs(sup_(x in D) {s_n (x) - s_m (x)}) = abs(sup_(x in D) {sum_(i = n + 1)^m u_i (x)}) < epsilon
+    sup_(x in D) {abs(s_n (x) - s_m (x))} = sup_(x in D) {abs(sum_(i = n + 1)^m u_i (x))} < epsilon
   $
   适合在 $s_n (x)$ 难以求出的时候使用。
 ]
 
 #theorem[Weierstrass判敛][
+  #align(center, strong([找到 $u_n (x)$ 上界 ${a_n}_(n = 1)^oo$]))
   $
     exists {a_n}_(n = 1)^oo subset RR^+, forall n in NN, \
     sup_(x in D) {abs(u_n (x))} <= a_n
@@ -60,6 +61,7 @@ $
 ]
 
 #theorem[Abel判敛][
+  #align(center, strong([震荡求和一致收敛，幅度单调趋于常数]))
   ${a_n (x)}_(n = 1)^oo, {b_n (x)}_(n = 1)^oo$ 为两个函数列。如果
   + ${a_n (x)}_(n = 1)^oo$ 关于 $n$ 单调，且一致有界。
     $
@@ -71,43 +73,56 @@ $
 ]
 
 #theorem[Dirichlet判敛][
+  #align(center, strong([震荡求和一致有界，幅度单调趋于 $0$]))
   ${a_n (x)}_(n = 1)^oo, {b_n (x)}_(n = 1)^oo$ 为两个函数列。如果
-  + $a_n (x) arrows.rr 0, quad n arrow oo$
-  + $sum_(i = 1)^N b_n (x)$ 一致有界。
+  + $a_n (x)$ 关于 $n$ 单调，$a_n (x) arrows.rr 0, quad n arrow oo$
+  + $sum_(i = 1)^N b_i (x)$ 一致有界。
   则 ${sum_(i = 1)^n a_i (x) b_i (x)}_(n = 1)^oo$ 一致收敛。
+]
+
+#theorem[Dini判敛][
+  #align(center, strong([紧集上连续单调，则点态收敛即一致收敛]))
+  在紧集 $E$ 上，$f_n : E -> R, f_n in C(E)$ 关于 $n$ 单调，$f_n -> f, f in C(E), quad n -> oo$，则 $f_n arrows.rr f, quad n -> oo$。
 ]
 
 === 不一致收敛
 
-#definition[定义][
+#corollary[定义][
   $
     exists epsilon_0, forall N in NN, exists n > N, \
     sup_(x in D) {abs(s_n (x) - s_oo (x)}) >= epsilon_0
   $
-  也即是能够找出 ${x_n}_(n = 1)^oo$ 的点列使得
+]
+
+#strategy[对角线判"散"][
+  #align(center, strong([寻找使 $abs(u_n (x_n)) >= epsilon_0$ 的 ${x_n}_(n = 1)^oo$]))
+  对于 ${s_n}_(n = 1)^oo slash {u_n}_(n = 1)^oo$ 找出 ${x_n}_(n = 1)^oo$ 的点列使得
   $
-    abs(s_n (x_n) - s_oo (x_n)) arrow.not 0, quad n arrow oo
+    abs(s_n (x_n) - s_oo (x_n)) & arrow.not 0, quad n arrow oo \
+            "or" abs(u_n (x_n)) & arrow.not 0, quad n -> oo
   $
   经常结合导数
   $
-    (s_n - s_oo)'(x_n) = 0
+    (s_n - s_oo)'(x_n) & = 0 \
+       "or" u'_n (x_n) & = 0
   $
-  来求解 ${x_n}_(n = 1)^oo$。也可以找 ${x_n}_(n = 1)^oo$ 的点列使得
-  $
-    abs(u_n (x_n)) arrow.not 0, quad n arrow oo
-  $
-  结合导数
-  $
-    u_n '(x_n) = 0
-  $
-  求解。
+  来求解 ${x_n}_(n = 1)^oo$。
 ]
 
-#theorem[Cauchy判敛][
+#corollary[Cauchy判敛][
+  #align(center, strong([分母上有 $n$ 导致难以判断一致收敛]))
   $
     exists epsilon_0, forall N in NN, exists m > n > N, \
     sup_(x in D) {abs(s_m (x) - s_n (x))} = sup_(x in D) {abs(sum_(i = n + 1)^m u_i (x))} >= epsilon_0
   $
+]
+
+#corollary[连续性定理逆用][
+  如果 $forall n, s_n in C(E), s in.not C(E)$，则
+  $
+    s_n arrow.r.not s, quad n -> oo
+  $
+  在 $x^n, quad x in (0, 1)$ 这种上面很方便。
 ]
 
 == 一致收敛级数的性质
@@ -139,8 +154,22 @@ $
   $
 ]
 
-#theorem[Dini判敛][
-  在紧集 $E$ 上，$f_n : E -> R$ 关于 $n$ 单调，$f_n -> f, f in C(E), quad n -> oo$，则 $f_n arrows.rr f, quad n -> oo$。
+== 例题
+
+#example[[1] Xie 14.1.4][Bendixon判敛][
+  $sum_(n = 1)^oo u_n (x)$ 为 $[a, b]$ 上的可微函数项级数，且 $sum_(n = 1)^oo u'_n (x)$ 在 $[a, b]$ 上收敛。证明：$sum_(n = 1)^oo u_n (x)$ 在 $[a, b]$ 上收敛能推出 $sum_(n = 1)^oo u_n (x)$ 在 $[a, b]$ 上一致收敛。
+]
+
+#example[[4] Xie 14.1.5][
+  证明：函数项级数 $sum_(n = 1)^oo (-1)^n x^n (1 - x)$ 在 $[0, 1]$ 上绝对收敛且一致收敛，但不绝对一致收敛。
+]
+
+#example[[5] Xie 14.1.7][
+  级数 $sum_(n = 1)^oo (sin (n x))/n$ 在闭区间 $[a, b]$ 上一致收敛的充分必要条件是 $[a, b]$ 中不包含 $2 pi$ 的整数倍点。
+]
+
+#example[[3] Xie 14.1.8][
+  设 ${b_n}_(n = 1)^oo$ 为单调减少的非负数列，证明：级数 $sum_(n = 1)^oo b_n sin(n x)$ 在 $(-oo, +oo)$ 上一致收敛的充分必要条件是 $b_n = o(1/n)$。
 ]
 
 = Chapter 11
@@ -244,15 +273,15 @@ $
 的Cramer法则得到
 
 $
-  u_x = -frac(det display(mat(F_x, F_v; G_x, G_v)), det display(mat(F_u, F_v; G_u, G_v))) = frac(det display(frac(partial (F, G), partial (x, v))), det display(frac(partial (F, G), partial (u, v)))),
-  v_x = -frac(det display(mat(F_u, F_x; G_u, G_x)), det display(mat(F_u, F_v; G_u, G_v))) = frac(det display(frac(partial (F, G), partial (u, x))), det display(frac(partial (F, G), partial (u, v))))
+  u_x = -frac(det display(mat(F_x, F_v; G_x, G_v)), det display(mat(F_u, F_v; G_u, G_v))) = -frac(det display(frac(partial (F, G), partial (x, v))), det display(frac(partial (F, G), partial (u, v)))),
+  v_x = -frac(det display(mat(F_u, F_x; G_u, G_x)), det display(mat(F_u, F_v; G_u, G_v))) = -frac(det display(frac(partial (F, G), partial (u, x))), det display(frac(partial (F, G), partial (u, v))))
 $
 
 以此类推
 
 $
-  u_y = -frac(det display(mat(F_y, F_v; G_y, G_v)), det display(mat(F_u, F_v; G_u, G_v))) = frac(det display(frac(partial (F, G), partial (y, v))), det display(frac(partial (F, G), partial (u, v)))),
-  v_y = -frac(det display(mat(F_u, F_y; G_u, G_y)), det display(mat(F_u, F_v; G_u, G_v))) = frac(det display(frac(partial (F, G), partial (u, y))), det display(frac(partial (F, G), partial (u, v))))
+  u_y = -frac(det display(mat(F_y, F_v; G_y, G_v)), det display(mat(F_u, F_v; G_u, G_v))) = -frac(det display(frac(partial (F, G), partial (y, v))), det display(frac(partial (F, G), partial (u, v)))),
+  v_y = -frac(det display(mat(F_u, F_y; G_u, G_y)), det display(mat(F_u, F_v; G_u, G_v))) = -frac(det display(frac(partial (F, G), partial (u, y))), det display(frac(partial (F, G), partial (u, v))))
 $
 
 高次偏导：
